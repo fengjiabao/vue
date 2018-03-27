@@ -18,20 +18,50 @@
 </template>
 
 <script>
+// import Socket from '@/socket/socket.js'
+import io from 'socket.io-client' 
 export default {
   name: 'Login',
   data () {
     return {
       user: '',
-      pwd: ''
+      pwd: '',
+      // Socket: Socket,
+      sock: ''
     }
   },
   methods: {
     startLogin: function () {
-      console.log(this.user)
-      console.log(this.pwd)
-      console.log(this.$router)
-      this.$router.replace({ path: '/User' })
+     if (!this.sock) {
+        this.sock = io.connect('http://localhost:8086',{
+          // "force new connection": true,
+          'reconnectionAttempts': 'Infinity', // avoid having user reconnect manually in order to prevent dead clients after a server restart
+          'timeout': 10000, // 10s, before connect_error and connect_timeout are emitted.
+          'transports': ['websocket']
+        })
+      }
+    console.log('this.sock',this.sock)
+    //  let self = this
+    //  this.sock.getConnection(3000).then((socket) => {
+    //   self.doLogin(username, userpwd)
+    //  }).catch((msg) => {
+    //   console.warn('Get connection error, please try later: ', msg)
+    // })
+      // this.$router.replace({ path: '/User' })
+    },
+    doLogin: function (name, pwd) {
+      let reqMsg = {
+      cmd: 'LOGIN',
+      data: {
+        user_name: name,
+        user_pass: pwd
+      }
+      }
+      this.pwd = pwd
+      this.sock.socket.emit('USER', reqMsg, (data) => {
+        console.log('data---------',data)
+      })
+
     }
   }
 }
