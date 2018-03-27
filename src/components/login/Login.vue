@@ -9,8 +9,9 @@
           <div class="minor-slogan">精益化生产 · 精准化管控 · 精细化操作</div>
         </div>
         <div class="login-form">
-          <input type="text" placeholder="用户名" v-model="user"/>
-          <input type="text" placeholder="密码" v-model="pwd"/>
+          <input type="text"  placeholder="用户名" v-model="user"/>
+          <input type="text"  placeholder="密码" v-model="pwd"/>
+          <p v-if='showTips'>{{tips}}</p>
           <button @click="startLogin">登录</button>
         </div>
     </div>
@@ -18,50 +19,59 @@
 </template>
 
 <script>
-// import Socket from '@/socket/socket.js'
-import io from 'socket.io-client' 
+// import Socket from '@/socket/socket.js' //to do
+import io from 'socket.io-client'
+import {url, connectionOpts} from '@/def/socketDef.js'
 export default {
   name: 'Login',
   data () {
     return {
       user: '',
       pwd: '',
-      // Socket: Socket,
-      sock: ''
+      sock: '',
+      showTips: false
     }
   },
   methods: {
     startLogin: function () {
-     if (!this.sock) {
-        this.sock = io.connect('http://localhost:8086',{
-          // "force new connection": true,
-          'reconnectionAttempts': 'Infinity', // avoid having user reconnect manually in order to prevent dead clients after a server restart
-          'timeout': 10000, // 10s, before connect_error and connect_timeout are emitted.
-          'transports': ['websocket']
-        })
+      if (!this.sock) {
+        this.sock = io.connect(url, connectionOpts)
       }
-    console.log('this.sock',this.sock)
-    //  let self = this
-    //  this.sock.getConnection(3000).then((socket) => {
-    //   self.doLogin(username, userpwd)
-    //  }).catch((msg) => {
-    //   console.warn('Get connection error, please try later: ', msg)
-    // })
-      // this.$router.replace({ path: '/User' })
+      if (this.sock.connected) {
+        this.doLogin(this.user, this.pwd)
+      }
     },
     doLogin: function (name, pwd) {
       let reqMsg = {
-      cmd: 'LOGIN',
-      data: {
-        user_name: name,
-        user_pass: pwd
-      }
+        cmd: 'login',
+        data: {
+          user_name: name,
+          user_pass: pwd
+        }
       }
       this.pwd = pwd
-      this.sock.socket.emit('USER', reqMsg, (data) => {
-        console.log('data---------',data)
+      this.sock.emit('USER', reqMsg, (res) => {
+        if (res.code === 0) {
+          console.log('登录成功！')
+          this.showTips = false
+          this.$router.replace({ path: '/User' })
+        } else {
+          this.showTips = true
+          this.tips = '登录失败！'
+          console.warn('登录失败！')
+        }
       })
-
+    }
+    // focus: function () {
+    //   this.showTips = false
+    // }
+  },
+  watch: {// 此处当账户和密码改变时隐藏tips,也可以利用onfocus事件来实现，但此处为了学习watch  可参考和commputed区别
+    user: function (val) {
+      this.showTips = false
+    },
+    pwd: function (val) {
+      this.showTips = false
     }
   }
 }
