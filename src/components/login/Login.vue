@@ -21,6 +21,7 @@
 <script>
 // import Socket from '@/socket/socket.js' //to do
 import io from 'socket.io-client'
+import { mapState } from 'vuex' //简化computed引入
 import {url, connectionOpts} from '@/def/socketDef.js'
 export default {
   name: 'Login',
@@ -31,11 +32,12 @@ export default {
       sock: ''
     }
   },
-  computed:{
-    showTips () {
-      return this.$store.state.storeLogin.showTips
-    }
-  },
+  // computed:{
+  //   showTips () {
+  //     return this.$store.state.storeLogin.showTips
+  //   }
+  // },
+  computed:  mapState({ showTips: state => state.storeLogin.showTips }),//简化写法
   methods: {
     startLogin: function () {
       if (!this.sock) {
