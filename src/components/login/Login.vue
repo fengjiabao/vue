@@ -28,8 +28,12 @@ export default {
     return {
       user: '',
       pwd: '',
-      sock: '',
-      showTips: false
+      sock: ''
+    }
+  },
+  computed:{
+    showTips () {
+      return this.$store.state.storeLogin.showTips
     }
   },
   methods: {
@@ -52,13 +56,11 @@ export default {
       this.pwd = pwd
       this.sock.emit('USER', reqMsg, (res) => {
         if (res.code === 0) {
-          console.log('登录成功！')
-          this.showTips = false
+          this.$store.commit('hide')
           this.$router.replace({ path: '/User' })
         } else {
-          this.showTips = true
+          this.$store.commit('show')
           this.tips = '登录失败！'
-          console.warn('登录失败！')
         }
       })
     }
@@ -68,10 +70,10 @@ export default {
   },
   watch: {// 此处当账户和密码改变时隐藏tips,也可以利用onfocus事件来实现，但此处为了学习watch  可参考和commputed区别
     user: function (val) {
-      this.showTips = false
+      this.$store.commit('hide')
     },
     pwd: function (val) {
-      this.showTips = false
+      this.$store.commit('hide')
     }
   }
 }
