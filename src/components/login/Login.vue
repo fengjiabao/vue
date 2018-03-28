@@ -59,7 +59,7 @@ export default {
       this.sock.emit('USER', reqMsg, (res) => {
         if (res.code === 0) {
           this.$store.commit('hide')
-          this.$router.replace({ path: '/User' })
+          this.$router.replace({ path: '/Monitor' })
         } else {
           this.$store.commit('show')
           this.tips = '登录失败！'

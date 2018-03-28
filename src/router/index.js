@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import User from '@/components/User'
-import UserHome from '@/components/UserHome'
-import UserPost from '@/components/UserPost'
+import Home from '@/components/monitor/Home'
+import Monitor from '@/components/monitor/Monitor'
+import Historys from '@/components/monitor/History'
+import My from '@/components/monitor/My'
 import Login from '@/components/login/Login'
 
 Vue.use(Router)
 
 export default new Router({
+  linkActiveClass: 'active',
   routes: [
     // {
     //   path: '/:id',//一个路径参数，使用：标记
@@ -21,12 +23,13 @@ export default new Router({
       component: Login
     },
     {
-      path: '/User',
-      name: 'User',
-      component: User,
+      path: '/Home',
+      name: 'Home',
+      component: Home,
       children: [
-        {path: '/userHome', component: UserHome},
-        {path: '/userPost', component: UserPost}
+        {path: '/Monitor', component: Monitor},
+        {path: '/History', component: Historys},
+        {path: '/My', component: My}
       ]
     },
     {
