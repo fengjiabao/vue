@@ -19,10 +19,9 @@
 </template>
 
 <script>
-// import Socket from '@/socket/socket.js' //to do
-import io from 'socket.io-client'
-import { mapState } from 'vuex' //简化computed引入
-import {url, connectionOpts} from '@/def/socketDef.js'
+import Socket from '@/socket/socket.js' // to do
+import { mapState } from 'vuex' // 简化computed引入
+
 export default {
   name: 'Login',
   data () {
@@ -37,13 +36,13 @@ export default {
   //     return this.$store.state.storeLogin.showTips
   //   }
   // },
-  computed:  mapState({ showTips: state => state.storeLogin.showTips }),//简化写法
+  computed: mapState({ showTips: state => state.storeLogin.showTips }), // 简化写法
   methods: {
     startLogin: function () {
       if (!this.sock) {
-        this.sock = io.connect(url, connectionOpts)
+        this.sock = new Socket()
       }
-      if (this.sock.connected) {
+      if (this.sock.socket.connected) {
         this.doLogin(this.user, this.pwd)
       }
     },
@@ -56,7 +55,7 @@ export default {
         }
       }
       this.pwd = pwd
-      this.sock.emit('USER', reqMsg, (res) => {
+      this.sock.socket.emit('USER', reqMsg, (res) => {
         if (res.code === 0) {
           this.$store.commit('hide')
           this.$router.replace({ path: '/Monitor' })
