@@ -1,6 +1,5 @@
 import io from 'socket.io-client' // eslint-disable-line
 import { EVT } from '../def/protocol.js'
-import store from '../store/storeIndex'
 
 // const url = window.location.host
 const url = 'http://localhost:8086'
@@ -23,8 +22,8 @@ export default class Socket {
 
   registerSocketEventHandlers () {
     this.socket.on(EVT.META, (res) => {
-      store.commit('setMetaData', res)
-      console.log('res---------', store)// 此处初始化datastore
+      console.log('res---',res)
+      console.log('eventbus',eventBus)
     })
   }
  }
