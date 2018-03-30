@@ -3,8 +3,8 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/monitor/Home'
 import Monitor from '@/components/monitor/Monitor'
-import Historys from '@/components/monitor/History'
-import My from '@/components/monitor/My'
+import Historys from '@/components/history/History'
+import My from '@/components/my/My'
 import Login from '@/components/login/Login'
 
 Vue.use(Router)
