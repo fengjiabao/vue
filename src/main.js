@@ -20,3 +20,4 @@ new Vue({
 
 window.eventBus = new Vue()
 window.xdata = new DataStore()
+eventBus.$emit('OPEN-LOCAL-DB')

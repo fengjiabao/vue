@@ -173,7 +173,6 @@ export default class MetaStore {
 
   async saveData(name, value) {
     try {
-        console.log('name-------',name)
       let table = xdata.dexieDBStore.db.table(name) || xdata.dexieDBStore.db[name]
       let rows = value ? value : await table.toArray()
       let keyname = name.slice(4)

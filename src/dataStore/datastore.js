@@ -2,6 +2,7 @@
 
 import MetaStore from './MetaStore.js'
 import DexieDBStore from './DexieDBStore.js'
+import MapStore from './MapStore.js'
 export default class DataStore {
     constructor () {
     //   this.userName = null // save the login user name
@@ -11,7 +12,7 @@ export default class DataStore {
   
       this.metaStore = new MetaStore(this)
       this.dexieDBStore = new DexieDBStore(this)
-      
+      this.mapStore = new MapStore(this)
     }
   
   }
