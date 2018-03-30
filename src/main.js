@@ -4,8 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import store from './store/storeIndex'
+import DataStore from './datastore/DataStore.js'
 
-window.eventBus = new Vue()
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -16,4 +17,6 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
-console.log('store++++++++++', store)
+
+window.eventBus = new Vue()
+window.xdata = new DataStore()
