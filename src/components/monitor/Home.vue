@@ -29,6 +29,9 @@ export default {
 <style scoped lang="less">
   p{
     display: flex;
+    align-items: center;
+    height: 10%;
+    margin: 0;
     justify-content: space-around;
     .active{
       color: #09f

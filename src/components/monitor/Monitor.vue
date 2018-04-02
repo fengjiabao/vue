@@ -10,28 +10,28 @@ import OlMapService from '../../service/OlMapService.js'
 import {mapState} from 'vuex'
 export default {
   name: 'Monitor',
-  data() {
+  data () {
     return {
       // MAP_CONTAINER_NAME: 'monitormap',
       mapService: null,
       mapid: xdata.metaStore.getDefaultMapID()
     }
   },
-  created(){
-      this.MAP_CONTAINER_NAME = 'monitormap'//钩子函数，确保加载地图时有元素
+  created () {
+    this.MAP_CONTAINER_NAME = 'monitormap'// 钩子函数，确保加载地图时有元素
       // this.mapid = xdata.metaStore.getDefaultMapID()
-      console.log('store',this.$store)
-      console.log('xdata',xdata)
-      console.log('xdata------',window.xdata)
+    console.log('store', this.$store)
+    console.log('xdata', xdata)
+    console.log('xdata------', window.xdata)
   },
-  mounted() {
-      this.mapService = new OlMapService(this.mapType)
-      this.mapService.loadMap(this.MAP_CONTAINER_NAME, this.mapid, this.map, this.mapRow)
+  mounted () {
+    this.mapService = new OlMapService(this.mapType)
+    this.mapService.loadMap(this.MAP_CONTAINER_NAME, this.mapid, this.map, this.mapRow)
   },
   computed:
     mapState({
-        map: state => state.storeMap.map, 
-        mapRow : state => state.storeMap.mapRow
+      map: state => state.storeMap.map,
+      mapRow: state => state.storeMap.mapRow
     })
 }
 </script>

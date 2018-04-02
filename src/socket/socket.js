@@ -1,5 +1,5 @@
 import io from 'socket.io-client' // eslint-disable-line
-import { EVT,CMD} from '../def/protocol.js'
+import { EVT, CMD } from '../def/protocol.js'
 
 // const url = window.location.host
 const url = 'http://localhost:8086'
@@ -48,7 +48,7 @@ export default class Socket {
     })
   }
 
-  registerGlobalEventHandlers(){
+  registerGlobalEventHandlers () {
     let self = this
     eventBus.$on('PULL-DOWN-METADATA', (msg) => {
       self.sendMsg(EVT.META, msg)
@@ -84,4 +84,4 @@ export default class Socket {
       eventBus.$emit('REPT-SHOW-RESULT', ds)
     })
   }
- }
+}
