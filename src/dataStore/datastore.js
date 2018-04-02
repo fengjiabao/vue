@@ -9,8 +9,8 @@ export default class DataStore {
     //   this.roleID = null
     //   this.lastUpdate = null // the last socket.io communication time.
     //   this.collectorStatus = -1  // 未连接
-      this.metaStore = new MetaStore(this)
-      this.dexieDBStore = new DexieDBStore(this)
+      this.metaStore = new MetaStore(this,store)
+      this.dexieDBStore = new DexieDBStore(this,store)
       this.mapStore = new MapStore(this,store)
     }
   

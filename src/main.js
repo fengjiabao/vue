@@ -8,6 +8,9 @@ import DataStore from './datastore/DataStore.js'
 
 
 Vue.config.productionTip = false
+window.eventBus = new Vue()
+window.xdata = new DataStore(store)
+eventBus.$emit('OPEN-LOCAL-DB')
 
 /* eslint-disable no-new */
 new Vue({
@@ -18,7 +21,4 @@ new Vue({
   components: { App }
 })
 
-window.eventBus = new Vue()
 
-window.xdata = new DataStore(store)
-eventBus.$emit('OPEN-LOCAL-DB')

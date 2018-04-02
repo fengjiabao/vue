@@ -11,7 +11,7 @@ let endWithID = /^(\w*)_id$/i
 const CARD_TYPES = ['vehicle_extend', 'staff_extend', 'adhoc']
 
 export default class MetaStore {
-  constructor (gstore) {
+  constructor (gstore,store) {
     this.gstore = gstore
     this.needMove = false // 判断切换到实时地图界面是否需要动画
 

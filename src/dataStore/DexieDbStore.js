@@ -2,7 +2,8 @@ import Dexie from 'dexie'
 const DB_NAME = 'YaLocDataInBrowserDB'
 
 export default class DexieDBStore {
-  constructor (gstore) {
+  constructor (gstore,store) {
+    this.store = store
     this.gstore = gstore
     this.db = null
     this.data = new Map() // 拉取元数据表
@@ -78,7 +79,6 @@ export default class DexieDBStore {
       let tableGroup = data[i], tableName = tableGroup.tableName
       xdata.metaStore.saveData(tableName)
     }
-    console.log('xdata.metaStore', xdata.metaStore)
   }
 
   async getArray (name, storename) {

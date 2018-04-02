@@ -1,5 +1,6 @@
 export default {
     state: {
+      mapStore: '',
       mapRow: '',
       map: '',
     },
