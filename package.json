@@ -16,6 +16,7 @@
     "dexie": "^2.0.2",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
+    "openlayers": "^4.6.5",
     "socket.io": "^2.0.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",

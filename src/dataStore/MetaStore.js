@@ -1,6 +1,6 @@
 
 
-import { formatElapsedTime } from '../../static/js/common.js'
+import { formatElapsedTime } from '../js/common.js'
 import { CARD } from '../def/state.js'
 import { DEFAULT_MAP_ID } from '../def/map_def.js'
 import specialTable from '../def/special_tablekey_def.js'

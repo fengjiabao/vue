@@ -1,7 +1,8 @@
 import { DEFAULT_MAP_ID,ZOOM_LEVEL } from '../def/map_def.js'
+import store from '../store/storeIndex'
 
 export default class MapStore {
-  constructor (gstore) {
+  constructor (gstore,store) {
     this.gisMap = new Map()
     this.maps = new Map() // 默认地图
     this.mapData = []
@@ -71,5 +72,10 @@ export default class MapStore {
     let storeMapRow = JSON.stringify(defaultMapData)
     window.localStorage.setItem('map', storeMap)
     window.localStorage.setItem('maprow', storeMapRow)
+    let mapStoreData = {
+      map: mapData,
+      mapRow: defaultMapData
+    }
+    store.commit('saveMapData',mapStoreData)
   }
 }

@@ -1,5 +1,5 @@
 import ol from 'openlayers'
-// import OlMapWorkspace from '../map/OlMapWorkspace.js'
+import OlMapWorkspace from '../maplayers/OlMapWorkspace.js'
 import { DEAFULT_MAP_MATRIXID } from '../def/map_def.js'
 // const areas = [28, 29]
 const maxZoom = 18
