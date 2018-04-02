@@ -102,7 +102,7 @@ export default class OlMapService {
             tileSize: [256, 256]
           }),
           matrixSet: matrixSet,
-          format: 'image/png',
+          format: '../../static/img/north.png',
           projection: 'EPSG:3857'
         })
       })
@@ -135,7 +135,7 @@ export default class OlMapService {
     let zoomslider = new ol.control.ZoomSlider()
     let ele = document.createElement('div')
     let img = document.createElement('img')
-    img.src = '../img/north.png'
+    img.src = '../../static/img/north.png'
     ele.innerHTML = img
     document.querySelector('.ol-compass').innerText = ''
     let resetNorth = new ol.control.Rotate({

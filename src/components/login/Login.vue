@@ -9,8 +9,8 @@
           <div class="minor-slogan">精益化生产 · 精准化管控 · 精细化操作</div>
         </div>
         <div class="login-form">
-          <input type="text"  placeholder="用户名" v-model="user"/>
-          <input type="text"  placeholder="密码" v-model="pwd"/>
+          <input type="text"  placeholder="用户名..." v-model="user"/>
+          <input type="password"  placeholder="密码..." v-model="pwd"/>
           <p v-if='showTips'>{{tips}}</p>
           <button @click="startLogin">登录</button>
         </div>
@@ -123,11 +123,15 @@ export default {
     input,button{
       height: .28rem;
       border: none;
-      padding: 0 0.1rem
+      padding: 0 0.1rem;
+      font-size: 0.14rem;
     }
     button{
       background: #09f;
-      color: #fff
+      color: #fff;
+    }
+    p{
+      color: red;
     }
 }
 </style>
