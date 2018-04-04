@@ -1,5 +1,6 @@
 import io from 'socket.io-client' // eslint-disable-line
 import { EVT, CMD } from '../def/protocol.js'
+import { toJson } from '../js/common.js'
 
 // const url = window.location.host
 const url = 'http://localhost:8086'
@@ -43,6 +44,159 @@ export default class Socket {
           break
         default:
           console.warn(`未知的 META 指令：cmd = ${cmd}`)
+          break
+      }
+    })
+
+    this.socket.on(EVT.PUSH, (ress) => {
+      // if (!xdata.metaStore.firstPull) return
+      // window.xhint.close()
+      let res = toJson(ress)
+      if (!res) {
+        console.warn('PUSH null message.')
+        return
+      }
+      let cmd = res.cmd
+      let data = res.data  // res.data could be string
+      if (typeof data === 'string') {
+        try {
+          data = JSON.parse(data)
+        } catch (error) {
+          console.warn('CAN NOT parse the PUSHed JSON data: ', data)
+          return
+        }
+      }
+
+      switch (cmd) {
+        case 'counting':
+          eventBus.$emit('COUNTING-UPDATE', {
+            data: data
+          })
+          break
+        case 'event':
+          eventBus.$emit('ALARM-UPDATE', {data: data})
+          break
+
+        case 'positon_all': // when login, push all the cards under well
+          eventBus.$emit('CARD-UPDATE-POS', data)
+          break
+        case 'pos_map':
+          eventBus.$emit('CARD-UPDATE-POS', data)
+          eventBus.$emit('COLLECTOR-STATUS-LOGIN')
+          // this.updateLastPushTime()
+          break
+
+        case 'down_mine':
+          eventBus.$emit('CARD-ADD-CARD', data)
+          break
+        case 'up_mine':
+          eventBus.$emit('CARD-REMOVE-CARD', data)
+          break
+        case 'coal_cutting':
+          eventBus.$emit('COAL-CUTTING-START', data)
+          break
+        case 'tunneller_stat':
+          eventBus.$emit('TUNNELLER-STAT-START', data)
+          break
+        case 'special_area_up_mine':
+          eventBus.$emit('CARD-REMOVE-ICON', data)
+          break
+        case 'device_state':
+          eventBus.$emit('DEVICE-UPDATE-STATE', data)
+          break
+        case 'call_card_resp':
+          eventBus.$emit('CALL-CARD-LIST', data)
+          break
+        case 'call_card_cancel_resp':
+          eventBus.$emit('CAll-CARD-REMOVE', data)
+          break
+        case 'light_ctrl_rsp':
+          eventBus.$emit('DEVICE-CHANGE-STATE', data)
+          break
+
+        case 'count_detail_resp':
+          eventBus.$emit('ALARM-DETAIL-COUNT', data)
+          break
+
+        case 'alarm_done':
+          // console.log('Got remote ALARM-DONE. \n', res)
+          eventBus.$emit('ALARM-DONE', res)
+          break
+
+        case 'helpme_done':
+          // console.log('Got remote HELPME-DONE. \n', res)
+          eventBus.$emit('HELPME-DONE', res)
+          break
+
+        case 'leader_arrange':
+          eventBus.$emit('CURRENT-LEADER-ARRANGE', data)
+          break
+
+        // case 'collector_status':
+        //   // console.log('Got remote collector-status. \n', res)
+        //   eventBus.$emit('COLLECTOR-STATUS', res)
+        //   this.updateLastPushTime()
+        //   break
+
+        case 'deal_hand_up_res':
+          eventBus.$emit('DRAG-HANDUP-CARD-RES', data)
+          break
+        
+        case 'nosignal_staffs':
+          eventBus.$emit('CARD-NOSIGNAL', data)
+          break
+
+        case 'resp_all_data':
+          if (!this.respAllData) {
+            this.respAllData = !this.respAllData
+            for (let i = 0; i < data.length; i++) {
+              let row = data[i]
+              switch (row.cmd) {
+                case 'pos_map':
+                  eventBus.$emit('POS-ALL-DATA', row)
+                  break
+                case 'special_area_up_mine':
+                  eventBus.$emit('RESP-ALL-DATA', row)
+                  break
+                case 'event':
+                  eventBus.$emit('ALARM-UPDATE', row)
+                  break
+                case 'callcardlist':
+                case 'call_card_resp':
+                  eventBus.$emit('CALL-CARD-LIST', row.data)
+                  break
+                case 'tunneller_stat':
+                  eventBus.$emit('TUNNELLER-STAT-START', row.data)
+                  break
+                case 'coal_cutting':
+                  eventBus.$emit('COAL-CUTTING-START', row.data)
+                  break
+                case 'leader_arrange':
+                  eventBus.$emit('CURRENT-LEADER-ARRANGE', row.data)
+                  break
+              }
+            }
+          }
+          break
+
+        case 'time':
+          eventBus.$emit('SERVER-DRIVER-TIME', res)
+          break
+        case 'environmental_data':
+          eventBus.$emit('ENVIRONMENTAL-DATA-START', data)
+          break
+        case 'person_on_car':
+          eventBus.$emit('PERSON-ON-CAR', data)
+          break
+        case 'resp_all_person_on_car':
+          eventBus.$emit('RESP-PERSON-ONCAR', data)
+          break
+        case CMD.META.DATA:
+          eventBus.$emit('META-DATA', res)
+          break
+        default:
+          console.log('res--------',res)
+          console.warn(`未知的 PUSH 消息指令：cmd = ${cmd}`)
           break
       }
     })

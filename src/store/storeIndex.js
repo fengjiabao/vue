@@ -4,6 +4,7 @@ import storeLogin from './storeLogin'
 import storeSocket from './storeSocket'
 import storeMap from './storeMap'
 import storeMeta from './storeMeta'
+import storeCard from './storeCard'
 
 Vue.use(Vuex)
 
@@ -13,6 +14,7 @@ export default new Vuex.Store({
     storeLogin,
     storeSocket,
     storeMap,
-    storeMeta
+    storeMeta,
+    storeCard
   }
 })

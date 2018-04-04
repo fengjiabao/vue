@@ -2,17 +2,30 @@
     <section class="monitor-general">
         <div>
            <span><img class="vehicle-img" src='static/img/vehicle.png'/></span>
+           <span @click="showDetail" data-type="VEHICLE">{{vehicleSum}}</span>
         </div>
         <div>
-            <span><img src='static/img/staff.png'/></span>
+           <span><img src='static/img/staff.png'/></span>
+           <span @click="showDetail" data-type="STAFF">{{staffSum}}</span>
         </div>
     </section>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   data() {
     return {
+    }
+  },
+  computed:mapState({
+    vehicleSum: state => state.storeCard.overview.vehicle,
+    staffSum: state => state.storeCard.overview.staff
+  }),
+  methods:{
+    showDetail:function(event){
+        let type = event.target.getAttribute('data-type')
+        this.$emit('showDetail',type)//向父组件通信
     }
   }
 }
@@ -32,7 +45,9 @@ export default {
             height: 100%;
             background: #fff;
             position: relative;
-            span{
+            display: flex;
+            justify-content: flex-end;
+            span:nth-child(1){
                 display: inline-block;
                 width: 60px;
                 height: 0;
@@ -53,6 +68,12 @@ export default {
                         top: -0.43rem;
                     }
                 }
+            }
+            span:nth-child(2){
+                width: .5rem;
+                line-height: .4rem;
+                font-size: .3rem;
+                color: #09F;
             }
         }
     }

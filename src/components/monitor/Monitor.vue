@@ -3,7 +3,7 @@
     <!--//匹配到一个路由时，参数值会被设置到 this.$route.params，可以在每个组件内使用-->
     <div class="monitor-root">
       <monitor-header></monitor-header>
-      <monitor-general></monitor-general>
+      <monitor-general v-on:showDetail="showDetail"></monitor-general>
       <div v-bind:id='MAP_CONTAINER_NAME' class="whfill"></div>
     </div>
 </template>
@@ -37,7 +37,12 @@ export default {
   computed:mapState({
       map: state => state.storeMap.map,
       mapRow: state => state.storeMap.mapRow
-    })
+  }),
+  methods:{
+    showDetail: function(msg){//子组件向父组件传递过来的
+      console.log('msg-----------',msg)
+    }
+  }
 }
 </script>
     
