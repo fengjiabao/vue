@@ -4,6 +4,7 @@
     <div class="monitor-root">
       <monitor-header></monitor-header>
       <monitor-general v-on:showDetail="showDetail"></monitor-general>
+      <monitor-detail v-if="showSumDetail"></monitor-detail>
       <div v-bind:id='MAP_CONTAINER_NAME' class="whfill"></div>
     </div>
 </template>
@@ -11,6 +12,7 @@
 <script>
 import monitorHeader from './header'
 import monitorGeneral from './general'
+import monitorDetail from './detail'
 import { DEFAULT_MAP_ID } from '../../def/map_def.js'
 import OlMapService from '../../service/OlMapService.js'
 import {mapState} from 'vuex'
@@ -20,7 +22,8 @@ export default {
     return {
       // MAP_CONTAINER_NAME: 'monitormap',
       mapService: null,
-      mapid: xdata.metaStore.getDefaultMapID()
+      mapid: xdata.metaStore.getDefaultMapID(),
+      showSumDetail: false
     }
   },
   created () {
@@ -28,18 +31,20 @@ export default {
   },
   components: {
     monitorHeader,
-    monitorGeneral
+    monitorGeneral,
+    monitorDetail
   },
   mounted () {
     this.mapService = new OlMapService(this.mapType)
     this.mapService.loadMap(this.MAP_CONTAINER_NAME, this.mapid, this.map, this.mapRow)
   },
   computed:mapState({
-      map: state => state.storeMap.map,
-      mapRow: state => state.storeMap.mapRow
+    map: state => state.storeMap.map,
+    mapRow: state => state.storeMap.mapRow
   }),
   methods:{
     showDetail: function(msg){//子组件向父组件传递过来的
+      this.showSumDetail = true
       console.log('msg-----------',msg)
     }
   }
