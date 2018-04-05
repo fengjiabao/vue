@@ -14,18 +14,18 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  data() {
+  data () {
     return {
     }
   },
-  computed:mapState({
+  computed: mapState({
     vehicleSum: state => state.storeCard.overview.vehicle,
     staffSum: state => state.storeCard.overview.staff
   }),
-  methods:{
-    showDetail:function(event){
-        let type = event.target.getAttribute('data-type')
-        this.$emit('showDetail',type)//向父组件通信
+  methods: {
+    showDetail: function (event) {
+      let type = event.target.getAttribute('data-type')
+      this.$emit('showDetail', type)// 向父组件通信
     }
   }
 }

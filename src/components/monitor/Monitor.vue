@@ -38,14 +38,14 @@ export default {
     this.mapService = new OlMapService(this.mapType)
     this.mapService.loadMap(this.MAP_CONTAINER_NAME, this.mapid, this.map, this.mapRow)
   },
-  computed:mapState({
+  computed: mapState({
     map: state => state.storeMap.map,
     mapRow: state => state.storeMap.mapRow
   }),
-  methods:{
-    showDetail: function(msg){//子组件向父组件传递过来的
+  methods: {
+    showDetail: function (msg) { // 子组件向父组件传递过来的
       this.showSumDetail = true
-      console.log('msg-----------',msg)
+      console.log('msg-----------', msg)
     }
   }
 }

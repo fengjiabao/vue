@@ -6,9 +6,9 @@
 <script>
 export default {
   methods: {
-      close: function (params) {
-          this.$parent.showSumDetail = false
-      }
+    close: function (params) {
+      this.$parent.showSumDetail = false
+    }
   }
 }
 </script>

@@ -17,31 +17,30 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-    name: 'My',
-    data(){
-        return{
-            myList:[{name:'更新配置',icon:'',type:'doUpdate'},{name:'修改密码',type:'resetPwd'},{name:'退出系统',type:'layOut'}]
-        }
-    },
-    computed:mapState({userName: state => state.storeLogin.user}),
-    methods:{
-        doOperate: function (type) {
-            switch (type) {
-                case 'doUpdate':
-                    console.log('doUpdate')
-                    break
-                case 'resetPwd':
-                    console.log('reset')
-                    break
-                case 'layOut':
-                    console.log('layOut')
-                    this.$router.replace({ path: '/' })
-                    break
-            }
-        }
+  name: 'My',
+  data () {
+    return {
+      myList: [{name: '更新配置', icon: '', type: 'doUpdate'}, {name: '修改密码', type: 'resetPwd'}, {name: '退出系统', type: 'layOut'}]
     }
+  },
+  computed: mapState({userName: state => state.storeLogin.user}),
+  methods: {
+    doOperate: function (type) {
+      switch (type) {
+        case 'doUpdate':
+          console.log('doUpdate')
+          break
+        case 'resetPwd':
+          console.log('reset')
+          break
+        case 'layOut':
+          console.log('layOut')
+          this.$router.replace({ path: '/' })
+          break
+      }
+    }
+  }
 }
-
 </script>
     
 <style scoped lang="less">

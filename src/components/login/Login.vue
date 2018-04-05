@@ -58,8 +58,8 @@ export default {
       this.sock.socket.emit('USER', reqMsg, (res) => {
         if (res.code === 0) {
           this.$store.commit('hide')
-          this.$store.commit('saveLoginData',{name: name,pwd: pwd})
-          console.log('store------------',this.$store)
+          this.$store.commit('saveLoginData', {name: name, pwd: pwd})
+          console.log('store------------', this.$store)
           this.$router.replace({ path: '/Monitor' })
         } else {
           this.$store.commit('show')

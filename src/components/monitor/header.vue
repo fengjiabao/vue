@@ -13,16 +13,16 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       curTitle: '车辆',
       curPlaceHolder: '车牌、车牌首字母、卡号',
-      list: [{name: '车辆',curPlaceHolder: '车牌、车牌首字母、卡号'},{name: '人员',curPlaceHolder: '人员、人员首字母、卡号'}],
+      list: [{name: '车辆', curPlaceHolder: '车牌、车牌首字母、卡号'}, {name: '人员', curPlaceHolder: '人员、人员首字母、卡号'}],
       showHeadList: false,
       isactive: false
     }
   },
-  methods:{
+  methods: {
     changeSHowList: function () {
       this.showHeadList = !this.showHeadList
     },
