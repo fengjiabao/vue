@@ -11,27 +11,35 @@
         <ul>
             <li v-for="(item,index) in myList" :key='index' @click="doOperate(item.type)">{{item.name}}</li>
         </ul>
+        <reset-pwd v-if='showResetPwd' :message='showResetPwd'></reset-pwd>
+        <!-- 父组件向子组件传递属性时v-bind传递变量，不带v-bind传递字符串 -->
     </div>
 </template>
     
 <script>
+import resetPwd from './reset.vue'
 import {mapState} from 'vuex'
 export default {
   name: 'My',
   data () {
     return {
+      showResetPwd: false,
       myList: [{name: '更新配置', icon: '', type: 'doUpdate'}, {name: '修改密码', type: 'resetPwd'}, {name: '退出系统', type: 'layOut'}]
     }
+  },
+  components: {
+    resetPwd
   },
   computed: mapState({userName: state => state.storeLogin.user}),
   methods: {
     doOperate: function (type) {
       switch (type) {
         case 'doUpdate':
-          console.log('doUpdate')
+          console.log('showResetPwd', this.showResetPwd)
           break
         case 'resetPwd':
           console.log('reset')
+          this.showResetPwd = true
           break
         case 'layOut':
           console.log('layOut')
