@@ -1,10 +1,17 @@
 export default {
   state: {
-    metaData: ''
+    sock: {}
   },
   mutations: {
-    setMetaData (state, val) { // 可传参，第二个为可传参数
-      state.metaData = val
+    saveSocket (state, val) { 
+      console.log('val-------------',val)
+      // state.sock = eval(val)
+      state.sock = val
+    }
+  },
+  actions: {
+    saveSocketAsync({ commit, state }, val) {
+      commit('saveSocket',val)
     }
   }
 }

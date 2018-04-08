@@ -20,7 +20,7 @@
 
 <script>
 import Socket from '@/socket/socket.js' // to do
-import { mapState } from 'vuex' // 简化computed引入
+import { mapState } from 'vuex' // simple computed
 
 export default {
   name: 'Login',
@@ -36,7 +36,7 @@ export default {
   //     return this.$store.state.storeLogin.showTips
   //   }
   // },
-  computed: mapState({ showTips: state => state.storeLogin.showTips }), // 简化写法
+  computed: mapState({ showTips: state => state.storeLogin.showTips }), // Simplified writing method
   methods: {
     startLogin: function () {
       if (!this.sock) {
@@ -44,6 +44,11 @@ export default {
       }
       if (this.sock.socket.connected) {
         this.doLogin(this.user, this.pwd)
+        this.$store.socket = this.sock.socket
+        // window.socket = this.sock.socket
+        // this.$store.dispatch('saveSocketAsync',this.sock.socket).then(() => { //todo: Find out the infeasible reasons
+        //   console.log('this.$store',this.$store)
+        // })
       }
     },
     doLogin: function (name, pwd) {
@@ -59,7 +64,6 @@ export default {
         if (res.code === 0) {
           this.$store.commit('hide')
           this.$store.commit('saveLoginData', {name: name, pwd: pwd})
-          console.log('store------------', this.$store)
           this.$router.replace({ path: '/Monitor' })
         } else {
           this.$store.commit('show')

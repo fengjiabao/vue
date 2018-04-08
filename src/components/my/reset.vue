@@ -17,6 +17,7 @@
     </div>
 </template>
 <script>
+import { EVT, CMD } from '../../def/protocol.js'
 export default{
   data () {
     return {
@@ -33,8 +34,21 @@ export default{
       if (!this.checkForm()) {
         this.showTips = true
         this.tips = '两次密码输入不一致，请核对后输入'
-      } else {
-          // to send msg to webserver~
+      } else { // to send msg to webserver~ 
+        this.$store.socket.emit(EVT.USER, {
+            cmd: CMD.USER.MODIFY,
+            data: {
+                username: this.$store.state.storeLogin.user,
+                oldpwd: this.list[0].value,
+                newpwd: this.list[1].value
+            }
+        }, (data) => {
+            if(data.code === 0){
+                 this.showTips = true
+                 this.tips = '修改密码成功！'
+                 this.$store.commit('saveLoginData',{name: this.$store.state.storeLogin.user,pwd: this.list[1].value})// save login data again
+            }
+        })
       }
     },
     checkForm: function () {

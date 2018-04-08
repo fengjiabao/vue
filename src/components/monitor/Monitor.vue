@@ -6,6 +6,8 @@
       <monitor-general v-on:showDetail="showDetail"></monitor-general>
       <monitor-detail v-if="showSumDetail"></monitor-detail>
       <div v-bind:id='MAP_CONTAINER_NAME' class="whfill"></div>
+      <div class="switch-tools" @click="showTool"><img src='static/img/tools.png'/></div>
+      <switch-tools v-if="showTools"></switch-tools>
     </div>
 </template>
     
@@ -13,6 +15,7 @@
 import monitorHeader from './header'
 import monitorGeneral from './general'
 import monitorDetail from './detail'
+import switchTools from './tools'
 import { DEFAULT_MAP_ID } from '../../def/map_def.js'
 import OlMapService from '../../service/OlMapService.js'
 import {mapState} from 'vuex'
@@ -23,16 +26,18 @@ export default {
       // MAP_CONTAINER_NAME: 'monitormap',
       mapService: null,
       mapid: xdata.metaStore.getDefaultMapID(),
-      showSumDetail: false
+      showSumDetail: false,
+      showTools: false
     }
   },
   created () {
-    this.MAP_CONTAINER_NAME = 'monitormap'// 钩子函数，确保加载地图时有元素
+    this.MAP_CONTAINER_NAME = 'monitormap'//Hook Function,make sure have ele before loadMap
   },
   components: {
     monitorHeader,
     monitorGeneral,
-    monitorDetail
+    monitorDetail,
+    switchTools
   },
   mounted () {
     this.mapService = new OlMapService(this.mapType)
@@ -43,9 +48,11 @@ export default {
     mapRow: state => state.storeMap.mapRow
   }),
   methods: {
-    showDetail: function (msg) { // 子组件向父组件传递过来的
+    showDetail: function (msg) { // send by child component, we can also put it to store
       this.showSumDetail = true
-      console.log('msg-----------', msg)
+    },
+    showTool: function (params) {
+      this.showTools = true
     }
   }
 }
@@ -57,6 +64,15 @@ export default {
   justify-content: center;
   width: 100%;
   height: 90%;
-  background: url(../../../static/img/mapBg.png) center center
+  position: relative;
+  background: url(../../../static/img/mapBg.png) center center;
+  .switch-tools{
+    position: absolute;
+    bottom: 5%;
+    left: 5%;
+    img{
+      width: .35rem;
+    }
+  }
 }
 </style>

@@ -25,7 +25,7 @@ export default {
   methods: {
     showDetail: function (event) {
       let type = event.target.getAttribute('data-type')
-      this.$emit('showDetail', type)// 向父组件通信
+      this.$emit('showDetail', type)// send parent msg
     }
   }
 }
@@ -36,7 +36,7 @@ export default {
         position: absolute;
         height: 0.4rem;
         width: 90%;
-        top: 10%;
+        top: 11%;
         z-index: 9;
         display: flex;
         justify-content: space-between;
