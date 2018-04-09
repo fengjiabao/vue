@@ -315,7 +315,7 @@ export default class OlMapCardLayer extends OlMapWorkLayer {
    */
   drawAllCards () {
     let cardsOnMap = xdata.cardStore.getCardsOnMap(this.mapID)
-    if (cardsOnMap && cardsOnMap.size > 0) {
+    if (cardsOnMap) {
       // clean all card canvas of the map
       for (let key in this.canvasList) {
         this.canvasList[key].innerHTML = ''

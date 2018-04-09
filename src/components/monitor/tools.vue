@@ -1,5 +1,5 @@
 <template>
-  <div class="monitor-tools">333333</div>
+  <div class="monitor-tools">Hello, welcome to tools page!</div>
 </template>
 <script>
 export default {
@@ -19,5 +19,6 @@ export default {
     background: #f5f5f5;
     border-top: 1px solid #e2e3e5;
     border-bottom: 1px solid #e2e3e5;
+    line-height: 1rem;
 }
 </style>

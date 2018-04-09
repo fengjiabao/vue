@@ -27,7 +27,8 @@ export default {
       mapService: null,
       mapid: xdata.metaStore.getDefaultMapID(),
       showSumDetail: false,
-      showTools: false
+      showTools: false,
+      mapType: 'MONITOR'
     }
   },
   created () {
@@ -42,7 +43,8 @@ export default {
   mounted () {
     this.mapService = new OlMapService(this.mapType)
     this.mapService.loadMap(this.MAP_CONTAINER_NAME, this.mapid, this.map, this.mapRow)
-    eventBus.$emit('MAP-INIT-CARD', { mapID: this.mapID, mapType: this.mapType, cardType: '*' })
+    eventBus.$emit('MAP-INIT-CARD', { mapID: this.mapid, mapType: this.mapType, cardType: '*' })
+    eventBus.$on('HIDE-ALL-POPUP', () => { this.showTools = false })
   },
   computed: mapState({
     map: state => state.storeMap.map,
