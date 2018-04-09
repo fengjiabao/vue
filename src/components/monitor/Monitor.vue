@@ -42,6 +42,7 @@ export default {
   mounted () {
     this.mapService = new OlMapService(this.mapType)
     this.mapService.loadMap(this.MAP_CONTAINER_NAME, this.mapid, this.map, this.mapRow)
+    eventBus.$emit('MAP-INIT-CARD', { mapID: this.mapID, mapType: this.mapType, cardType: '*' })
   },
   computed: mapState({
     map: state => state.storeMap.map,

@@ -70,7 +70,7 @@ export default {
                 }
             }
             span:nth-child(2){
-                width: .5rem;
+                width: .66rem;
                 line-height: .4rem;
                 font-size: .3rem;
                 color: #09F;

@@ -408,10 +408,10 @@ export default class CardStore {
         }
         // if (mapID !== defaultMapID) return
 
-        if (xdata.userDept === '0' || card[CARD.dept_id] === xdata.userDept) {  // 全局 或 对应部门的详情
+        // if (xdata.userDept === '0' || card[CARD.dept_id] === xdata.userDept) {  // 全局 或 对应部门的详情
           xmap.set(cardID, card)
           this.showCard(cardID, card, needMove)
-        }
+        // }
       }
     }
 
