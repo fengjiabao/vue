@@ -75,7 +75,7 @@ export default class OlMapCardLayer extends OlMapWorkLayer {
     let posdata = []
 
     eventBus.$on('MAP-CARD-UPDATE', (msg) => {
-      self.mapType !== 'HISTORY' && self.drawCard(msg, posdata)
+        self.mapType !== 'HISTORY' && self.drawCard(msg, posdata)
     })
 
     eventBus.$on('REMOVE-MAP-CARD', (msg) => {
@@ -191,58 +191,58 @@ export default class OlMapCardLayer extends OlMapWorkLayer {
       }
     })
 
-    this.map.getView().addEventListener('change:resolution', (evt) => {
-      let viewZoom = view.getZoom()
-      if (this.staff) {
-        if (viewZoom >= showStaffLevel) { // 显示人员图标
-          this.areaStaffLayer.setVisible(false)
-          this.staffLayer.setVisible(true)
-          if (viewZoom > ZOOM_LEVEL.STAFFLEAVE) {
-            this.adjustStaffs(viewZoom)
-          } else {
-            let isStaffChange = this.judgeZoomlevel(viewZoom, 'staff')
-            isStaffChange && this.adjustStaffs(viewZoom) // 调整人员图标随地图放大而缩小
-          }
-          // let isStaffChange = this.judgeZoomlevel(viewZoom, 'staff')
-          // isStaffChange && this.adjustStaffs(viewZoom) // 调整人员图标随地图放大而缩小
-        } else { // 显示人员区域数量
-          this.areaStaffLayer.setVisible(true)
-          this.staffLayer.setVisible(false)
-        }
-        // this.staffLayer.setVisible(true)
-        // if (viewZoom > ZOOM_LEVEL.STAFFLEAVE) {
-        //   this.adjustStaffs(viewZoom)
-        // } else {
-        //   let isStaffChange = this.judgeZoomlevel(viewZoom, 'staff')
-        //   isStaffChange && this.adjustStaffs(viewZoom) // 调整人员图标随地图放大而缩小
-        // }
-      } else {
-        this.areaStaffLayer.setVisible(false)
-        this.staffLayer.setVisible(false)
-      }
+    // this.map.getView().addEventListener('change:resolution', (evt) => {
+    //   let viewZoom = view.getZoom()
+    //   if (this.staff) {
+    //     if (viewZoom >= showStaffLevel) { // 显示人员图标
+    //       this.areaStaffLayer.setVisible(false)
+    //       this.staffLayer.setVisible(true)
+    //       if (viewZoom > ZOOM_LEVEL.STAFFLEAVE) {
+    //         this.adjustStaffs(viewZoom)
+    //       } else {
+    //         let isStaffChange = this.judgeZoomlevel(viewZoom, 'staff')
+    //         isStaffChange && this.adjustStaffs(viewZoom) // 调整人员图标随地图放大而缩小
+    //       }
+    //       // let isStaffChange = this.judgeZoomlevel(viewZoom, 'staff')
+    //       // isStaffChange && this.adjustStaffs(viewZoom) // 调整人员图标随地图放大而缩小
+    //     } else { // 显示人员区域数量
+    //       this.areaStaffLayer.setVisible(true)
+    //       this.staffLayer.setVisible(false)
+    //     }
+    //     // this.staffLayer.setVisible(true)
+    //     // if (viewZoom > ZOOM_LEVEL.STAFFLEAVE) {
+    //     //   this.adjustStaffs(viewZoom)
+    //     // } else {
+    //     //   let isStaffChange = this.judgeZoomlevel(viewZoom, 'staff')
+    //     //   isStaffChange && this.adjustStaffs(viewZoom) // 调整人员图标随地图放大而缩小
+    //     // }
+    //   } else {
+    //     this.areaStaffLayer.setVisible(false)
+    //     this.staffLayer.setVisible(false)
+    //   }
 
-      let shouldChange = this.judgeZoomlevel(viewZoom)
-      if (shouldChange) { // 仅限车辆图层
-        let features = this.vehicleLayerSource.getFeatures()
-        for (let feature of features) {
-          let featureID = feature.getId()
-          if (!/line/g.test(featureID)) {
-            let type = feature.getProperties() && feature.getProperties().type
+    //   let shouldChange = this.judgeZoomlevel(viewZoom)
+    //   if (shouldChange) { // 仅限车辆图层
+    //     let features = this.vehicleLayerSource.getFeatures()
+    //     for (let feature of features) {
+    //       let featureID = feature.getId()
+    //       if (!/line/g.test(featureID)) {
+    //         let type = feature.getProperties() && feature.getProperties().type
 
-            let img = feature.getStyle() && feature.getStyle().getImage()
-            let rotation = img ? img.getRotation() : 0
-            if (type !== 'trackFeature' && viewZoom < maxZoom) {
-              feature.setStyle(createLabelStyle(feature, type, viewZoom, rotation, this.map))// Don't change the order
-            } else if (viewZoom >= maxZoom) {
-              let isfeature = this.workspace.OlMapWorkFace.layerSource.getFeatureById('workface')
-              if (isfeature) {
-                this.workspace.OlMapWorkFace && this.workspace.OlMapWorkFace.adjustmentVehicle(this.workspace.OlMapWorkFace.cardID)
-              }
-            }
-          }
-        }
-      }
-    })
+    //         let img = feature.getStyle() && feature.getStyle().getImage()
+    //         let rotation = img ? img.getRotation() : 0
+    //         if (type !== 'trackFeature' && viewZoom < maxZoom) {
+    //           feature.setStyle(createLabelStyle(feature, type, viewZoom, rotation, this.map))// Don't change the order
+    //         } else if (viewZoom >= maxZoom) {
+    //           let isfeature =this.workspace.OlMapWorkFace && this.workspace.OlMapWorkFace.layerSource.getFeatureById('workface')
+    //           if (isfeature) {
+    //             this.workspace.OlMapWorkFace && this.workspace.OlMapWorkFace.adjustmentVehicle(this.workspace.OlMapWorkFace.cardID)
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // })
   }
 
   adjustStaffs (viewZoom) {
@@ -536,7 +536,7 @@ export default class OlMapCardLayer extends OlMapWorkLayer {
           if (needMove) {
             this.setCardCoord(cardID, group, card)
           } else {
-            this.cardAnimation(cardID, group, card)
+            // this.cardAnimation(cardID, group, card)
           }
         } else {
           group = this.drawCardOn(card, 'card-add', 'special')
@@ -553,7 +553,7 @@ export default class OlMapCardLayer extends OlMapWorkLayer {
             if (needMove) {
               this.setCardCoord(cardID, group, card)
             } else {
-              this.cardAnimation(cardID, group, card)
+              // this.cardAnimation(cardID, group, card)
             }
           } else {
             group = this.drawCardOn(card, 'card-add')
@@ -959,7 +959,6 @@ export default class OlMapCardLayer extends OlMapWorkLayer {
       name: name,
       faceID: faceID
     }
-
     let layerSource = cardTypeName === 'vehicle' ? this.vehicleLayerSource : this.staffLayerSource
     return drawSymbol(attrs, layerSource, this.map, type)
   }

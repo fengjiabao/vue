@@ -43,7 +43,7 @@ export default {
   mounted () {
     this.mapService = new OlMapService(this.mapType)
     this.mapService.loadMap(this.MAP_CONTAINER_NAME, this.mapid, this.map, this.mapRow)
-    eventBus.$emit('MAP-INIT-CARD', { mapID: this.mapid, mapType: this.mapType, cardType: '*' })
+    // eventBus.$emit('MAP-INIT-CARD', { mapID: this.mapid, mapType: this.mapType, cardType: '*' })
     eventBus.$on('HIDE-ALL-POPUP', () => { this.showTools = false })
   },
   computed: mapState({

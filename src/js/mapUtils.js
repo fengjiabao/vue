@@ -411,7 +411,7 @@ function addPersonNum (cardID, feature, text) {
   if (!text) {
     return
   }
-  let sum = xdata.PersonOnCarStore.personOnCarSum.get(cardID)
+  let sum = xdata.PersonOnCarStore && xdata.PersonOnCarStore.personOnCarSum.get(cardID)
   sum = sum ? ',' + sum + '人' : ''
   return text + sum
 }

@@ -3,8 +3,8 @@ import { EVT, CMD } from '../def/protocol.js'
 import { toJson } from '../js/common.js'
 
 // const url = window.location.host
-const url = 'http://localhost:8086'
-// const url = 'http://local.beijingyongan.com:9000'
+// const url = 'http://localhost:8086'
+const url = 'http://60.220.238.150:8086'
 
 const connectionOpts = {
   // "force new connection": true,
@@ -57,6 +57,7 @@ export default class Socket {
         return
       }
       let cmd = res.cmd
+      console.log('cmd',cmd)
       let data = res.data  // res.data could be string
       if (typeof data === 'string') {
         try {

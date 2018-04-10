@@ -1,8 +1,8 @@
 let mapIcon = {
     'vehiclePoint': {
-      'red': {img: '../../img/redpoint.png'},
-      'green': {img: '../../img/greenpoint.png'},
-      'yellow': {img: '../../img/yellowpoint.png'}
+      'red': {img: 'static/img/redpoint.png'},
+      'green': {img: 'static/img/greenpoint.png'},
+      'yellow': {img: 'static/img/yellowpoint.png'}
     },
     'staff': {
       'nosignal': {
@@ -23,22 +23,22 @@ let mapIcon = {
     },
     'vehicle': {
       'nosignal': {
-        img: '../../img/special.png'
+        img: 'static/img/special.png'
       },
       'greencar': {
-        img: '../../img/greencar.png'
+        img: 'static/img/greencar.png'
       },
       'yellowcar': {
-        img: '../../img/yellowcar.png'
+        img: 'static/img/yellowcar.png'
       },
       'redcar': {
-        img: '../../img/redcar.png'
+        img: 'static/img/redcar.png'
       },
       'unregistered': {
-        img: '../../img/unregisteredvehicle.png'
+        img: 'static/img/unregisteredvehicle.png'
       },
       'tunnel': {
-        img: '../../img/drivevehicle.png'
+        img: 'static/img/drivevehicle.png'
       }
     }
   }
